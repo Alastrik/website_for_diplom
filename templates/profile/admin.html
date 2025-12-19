@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Мой профиль — Администратор{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h2 class="h3 mb-1">
+                    <i class="bi bi-shield-lock-fill me-2"></i>Панель администратора
+                </h2>
+                <p class="text-muted mb-0">
+                    <i class="bi bi-person-circle me-1"></i>{{ user.username }} • {{ user.email }}
+                </p>
+            </div>
+            <a href="{% url 'muiv_graduation_system:logout' %}" class="btn btn-outline-danger">
+                <i class="bi bi-box-arrow-right me-1"></i>Выйти
+            </a>
+        </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-people-fill text-primary mb-2" style="font-size: 2.5rem;"></i>
+                    <h3 class="h2 mb-1">{{ stats.total_users }}</h3>
+                    <p class="text-muted mb-0">Всего пользователей</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-mortarboard-fill text-info mb-2" style="font-size: 2.5rem;"></i>
+                    <h3 class="h2 mb-1">{{ stats.total_graduates }}</h3>
+                    <p class="text-muted mb-0">Выпускников в системе</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-briefcase-fill text-success mb-2" style="font-size: 2.5rem;"></i>
+                    <h3 class="h2 mb-1">{{ stats.employed_graduates }}</h3>
+                    <p class="text-muted mb-0">Трудоустроено</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm h-100 hover-shadow transition">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary bg-opacity-10 rounded p-3 me-3">
+                    <i class="bi bi-people-fill text-primary" style="font-size: 1.5rem;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0">Управление платформой</h5>
+                    <small class="text-muted">Просмотр и редактирование данных</small>
+                </div>
+            </div>
+            <a href="/admin/"
+               class="btn btn-primary w-100">
+                <i class="bi bi-eye me-1"></i>Перейти
+            </a>
+        </div>
+    </div>
+{% endblock %}

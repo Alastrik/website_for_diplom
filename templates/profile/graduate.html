@@ -1,0 +1,131 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Мой профиль — Выпускник{% endblock %}
+
+{% block content %}
+     <!-- Заголовок страницы -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+            <i class="bi bi-person-badge me-2"></i>Мой профиль
+        </h1>
+        <span class="badge bg-success">Выпускник</span>
+    </div>
+
+    <div class="row g-4">
+        <!-- Карточка: Личные данные -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-person-lines-fill me-2"></i>Личные данные
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-5 text-muted">ФИО:</dt>
+                        <dd class="col-sm-7">{{ graduate.full_name }}</dd>
+
+                        <dt class="col-sm-5 text-muted">Год выпуска:</dt>
+                        <dd class="col-sm-7">
+                            <span class="fs-5">{{ graduate.graduation_year }}</span>
+                        </dd>
+
+                        <dt class="col-sm-5 text-muted">Факультет:</dt>
+                        <dd class="col-sm-7">{{ graduate.faculty|default:"<span class='text-muted'>Не указан</span>" }}</dd>
+
+                        <dt class="col-sm-5 text-muted">Специальность:</dt>
+                        <dd class="col-sm-7">{{ graduate.specialization|default:"<span class='text-muted'>Не указана</span>" }}</dd>
+
+                        <dt class="col-sm-5 text-muted">Email:</dt>
+                        <dd class="col-sm-7">
+                            <a href="mailto:{{ graduate.email }}" class="text-decoration-none">
+                                <i class="bi bi-envelope me-1"></i>{{ graduate.email }}
+                            </a>
+                        </dd>
+
+                        <dt class="col-sm-5 text-muted">Телефон:</dt>
+                        <dd class="col-sm-7">
+                            {% if graduate.phone %}
+                                <a href="tel:{{ graduate.phone }}" class="text-decoration-none">
+                                    <i class="bi bi-telephone me-1"></i>{{ graduate.phone }}
+                                </a>
+                            {% else %}
+                                <span class="text-muted">Не указан</span>
+                            {% endif %}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточка: Информация о трудоустройстве -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-info text-white">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-briefcase-fill me-2"></i>Трудоустройство
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-5 text-muted">Статус:</dt>
+                        <dd class="col-sm-7">
+                            {% if graduate.employment and graduate.employment.status %}
+                                <span class="badge bg-success">{{ graduate.employment.status.name }}</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Не указан</span>
+                            {% endif %}
+                        </dd>
+
+                        <dt class="col-sm-5 text-muted">Работодатель:</dt>
+                        <dd class="col-sm-7">
+                            {% if graduate.employment.employer.name %}
+                                <strong>{{ graduate.employment.employer.name }}</strong>
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </dd>
+
+                        <dt class="col-sm-5 text-muted">Должность:</dt>
+                        <dd class="col-sm-7">{{ graduate.employment.job_title|default:"<span class='text-muted'>—</span>" }}</dd>
+
+                        <dt class="col-sm-5 text-muted">Зарплата:</dt>
+                        <dd class="col-sm-7">
+                            {% if graduate.employment.salary %}
+                                <span class="text-success fw-semibold">
+                                    {{ graduate.employment.salary|floatformat:0 }} ₽/мес.
+                                </span>
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </dd>
+
+                        <dt class="col-sm-5 text-muted">Дата начала:</dt>
+                        <dd class="col-sm-7">
+                            {% if graduate.employment and graduate.employment.start_date %}
+                                {{ graduate.employment.start_date|date:"d.m.Y" }}
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Панель действий -->
+    <div class="d-flex flex-wrap gap-2 mt-4">
+        <a href="{% url 'muiv_graduation_system:edit_graduate' %}" class="btn btn-primary">
+            <i class="bi bi-pencil-square me-1"></i>Редактировать профиль
+        </a>
+        <a href="{% url 'muiv_graduation_system:export_my_data_docx' %}" class="btn btn-outline-primary">
+            <i class="bi bi-file-earmark-word me-1"></i>Скачать данные (.docx)
+        </a>
+        <a href="{% url 'muiv_graduation_system:logout' %}" class="btn btn-danger ms-auto">
+            <i class="bi bi-box-arrow-right me-1"></i>Выйти
+        </a>
+    </div>
+
+{% endblock %}

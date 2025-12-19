@@ -1,0 +1,365 @@
+{% extends 'base/base.html' %}
+
+{% block pre %}
+    <div class="bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">
+                        Система учёта трудоустройства выпускников
+                    </h1>
+                    <p class="lead mb-4">
+                        МУ им. С.Ю. Витте — Ваш путь к успешной карьере начинается здесь
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'muiv_graduation_system:profile' %}" class="btn btn-light btn-lg">
+                                <i class="bi bi-person-circle me-2"></i>Мой профиль
+                            </a>
+                        {% else %}
+                            <a href="{% url 'muiv_graduation_system:login' %}" class="btn btn-light btn-lg">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                            </a>
+                            <a href="{% url 'muiv_graduation_system:register' %}" class="btn btn-light btn-lg">
+                                <i class="bi bi-person-plus me-2"></i>Регистрация
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block text-center">
+                    <i class="bi bi-mortarboard-fill" style="font-size: 10rem; opacity: 0.2;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-- Статистика -->
+    <div class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body py-4">
+                            <i class="bi bi-people-fill text-primary mb-3" style="font-size: 3rem;"></i>
+                            <h3 class="h2 mb-2">12684</h3>
+                            <p class="text-muted mb-0">Учащихся на 2025 год</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body py-4">
+                            <i class="bi bi-briefcase-fill text-success mb-3" style="font-size: 3rem;"></i>
+                            <h3 class="h2 mb-2">29 место среди вузов России</h3>
+                            <p class="text-muted mb-0">По трудоустройству выпускников по итогам 2025 года</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body py-4">
+                            <i class="bi bi-building text-info mb-3" style="font-size: 3rem;"></i>
+                            <h3 class="h2 mb-2">200+ Компаний партнеров</h3>
+                            <p class="text-muted mb-0">19 из них иностранных</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Для кого этот сайт -->
+    <div class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="h1 mb-3">Для кого эта система?</h2>
+                <p class="lead text-muted">Удобные инструменты для каждой роли</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Выпускники -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100 border-0 hover-shadow transition">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary bg-opacity-10 rounded-3 p-3 me-3">
+                                    <i class="bi bi-mortarboard-fill text-primary" style="font-size: 2rem;"></i>
+                                </div>
+                                <h3 class="h4 mb-0">Выпускники</h3>
+                            </div>
+                            <p class="text-muted mb-3">
+                                Ведите учёт своего карьерного пути и делитесь успехами с университетом
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Отслеживание статуса трудоустройства
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Обновление информации о работе
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Экспорт личных данных
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Обратная связь с университетом
+                                </li>
+                            </ul>
+                            {% if not user.is_authenticated %}
+                                <a href="{% url 'muiv_graduation_system:register_as' role='graduate' %}"
+                                   class="btn btn-primary w-100 mt-3">
+                                    Регистрация выпускника
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Менеджеры -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100 border-0 hover-shadow transition">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success bg-opacity-10 rounded-3 p-3 me-3">
+                                    <i class="bi bi-briefcase-fill text-success" style="font-size: 2rem;"></i>
+                                </div>
+                                <h3 class="h4 mb-0">Менеджеры</h3>
+                            </div>
+                            <p class="text-muted mb-3">
+                                Управляйте данными выпускников и формируйте аналитические отчёты
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Управление базой выпускников
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Поиск и фильтрация данных
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Экспорт отчётов (DOCX, XLSX)
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Статистика трудоустройства
+                                </li>
+                            </ul>
+                            {% if not user.is_authenticated %}
+                                <a href="{% url 'muiv_graduation_system:register_as' role='manager' %}"
+                                   class="btn btn-success w-100 mt-3">
+                                    Заявка менеджера
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Администраторы -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100 border-0 hover-shadow transition">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-danger bg-opacity-10 rounded-3 p-3 me-3">
+                                    <i class="bi bi-shield-lock-fill text-danger" style="font-size: 2rem;"></i>
+                                </div>
+                                <h3 class="h4 mb-0">Администраторы</h3>
+                            </div>
+                            <p class="text-muted mb-3">
+                                Полный контроль над системой и управление пользователями
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Управление пользователями
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Одобрение заявок менеджеров
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Создание новых аккаунтов
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Мониторинг системы
+                                </li>
+                            </ul>
+                            <div class="alert alert-info small mt-3 mb-0">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Доступ предоставляется администратором
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- О проекте -->
+    <div class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="h1 mb-4">О проекте</h2>
+                    <p class="lead mb-3">
+                        Информационная система разработана в рамках выпускной квалификационной работы
+                    </p>
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                            <h5 class="mb-2">
+                                <i class="bi bi-journal-text text-primary me-2"></i>Тема ВКР
+                            </h5>
+                            <p class="text-muted mb-0">
+                                «Разработка информационной системы учета трудоустройства выпускников
+                                (на примере МУ им. С.Ю. Витте)»
+                            </p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'muiv_graduation_system:about' %}" class="btn btn-outline-primary">
+                            <i class="bi bi-info-circle me-1"></i>Подробнее о проекте
+                        </a>
+                        <a href="{% url 'muiv_graduation_system:contacts' %}" class="btn btn-outline-secondary">
+                            <i class="bi bi-envelope me-1"></i>Контакты
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-4">
+                                    <i class="bi bi-lightning-charge-fill text-warning mb-2"
+                                       style="font-size: 2.5rem;"></i>
+                                    <h6 class="mb-0">Быстрый доступ</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-4">
+                                    <i class="bi bi-shield-check text-success mb-2" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mb-0">Безопасность</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-4">
+                                    <i class="bi bi-graph-up-arrow text-info mb-2" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mb-0">Аналитика</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-4">
+                                    <i class="bi bi-file-earmark-arrow-down text-primary mb-2"
+                                       style="font-size: 2.5rem;"></i>
+                                    <h6 class="mb-0">Экспорт</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Преимущества -->
+    <div class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="h1 mb-3">Возможности системы</h2>
+                <p class="lead text-muted">Всё необходимое для эффективного учёта трудоустройства</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-primary bg-opacity-10 rounded-3 d-inline-flex p-4 mb-3">
+                            <i class="bi bi-person-check-fill text-primary" style="font-size: 2rem;"></i>
+                        </div>
+                        <h5>Учёт выпускников</h5>
+                        <p class="text-muted small">Полная база данных с историей трудоустройства</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-success bg-opacity-10 rounded-3 d-inline-flex p-4 mb-3">
+                            <i class="bi bi-search text-success" style="font-size: 2rem;"></i>
+                        </div>
+                        <h5>Умный поиск</h5>
+                        <p class="text-muted small">Быстрый поиск по всем параметрам</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-info bg-opacity-10 rounded-3 d-inline-flex p-4 mb-3">
+                            <i class="bi bi-bar-chart-fill text-info" style="font-size: 2rem;"></i>
+                        </div>
+                        <h5>Статистика</h5>
+                        <p class="text-muted small">Детальная аналитика и отчёты</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-warning bg-opacity-10 rounded-3 d-inline-flex p-4 mb-3">
+                            <i class="bi bi-file-earmark-text-fill text-warning" style="font-size: 2rem;"></i>
+                        </div>
+                        <h5>Экспорт</h5>
+                        <p class="text-muted small">DOCX и XLSX форматы</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA секция -->
+    <div class="bg-primary text-white py-5">
+        <div class="container text-center">
+            <h2 class="h1 mb-3">Готовы начать?</h2>
+            <p class="lead mb-4">
+                Присоединяйтесь к системе учёта трудоустройства уже сегодня
+            </p>
+            {% if not user.is_authenticated %}
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{% url 'muiv_graduation_system:register' %}" class="btn btn-light btn-lg">
+                        <i class="bi bi-person-plus me-2"></i>Зарегистрироваться
+                    </a>
+                    <a href="{% url 'muiv_graduation_system:feedback' %}" class="btn btn-light btn-lg">
+                        <i class="bi bi-chat-dots me-2"></i>Задать вопрос
+                    </a>
+                </div>
+            {% else %}
+                <a href="{% url 'muiv_graduation_system:profile' %}" class="btn btn-light btn-lg">
+                    <i class="bi bi-speedometer2 me-2"></i>Перейти в панель управления
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <style>
+        .hover-shadow {
+            transition: all 0.3s ease;
+        }
+
+        .hover-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .transition {
+            transition: all 0.3s ease;
+        }
+    </style>
+
+{% endblock %}

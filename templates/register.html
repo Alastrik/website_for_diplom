@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-2">
+    <div class="col-lg-8 col-xl-6">
+        <div class="text-center mb-5">
+            <i class="bi bi-person-plus-fill text-primary mb-3" style="font-size: 3rem;"></i>
+            <h2 class="h3 mb-3">Регистрация в системе</h2>
+            <p class="text-muted">Выберите свою роль для продолжения</p>
+        </div>
+
+        <!-- Карточки выбора роли -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <a href="{% url 'muiv_graduation_system:register_as' role='graduate' %}"
+                   class="card text-decoration-none h-100 shadow-sm hover-shadow transition">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="bi bi-mortarboard-fill text-primary" style="font-size: 3.5rem;"></i>
+                        </div>
+                        <h3 class="h5 mb-2">Выпускник</h3>
+                        <p class="text-muted small mb-3">
+                            Для выпускников университета, желающих зарегистрироваться в системе учёта трудоустройства
+                        </p>
+                        <span class="btn btn-primary btn-sm">
+                            Зарегистрироваться <i class="bi bi-arrow-right ms-1"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <a href="{% url 'muiv_graduation_system:register_as' role='manager' %}"
+                   class="card text-decoration-none h-100 shadow-sm hover-shadow transition">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="bi bi-briefcase-fill text-success" style="font-size: 3.5rem;"></i>
+                        </div>
+                        <h3 class="h5 mb-2">Менеджер</h3>
+                        <p class="text-muted small mb-3">
+                            Для сотрудников университета, управляющих данными о трудоустройстве выпускников
+                        </p>
+                        <span class="btn btn-success btn-sm">
+                            Зарегистрироваться <i class="bi bi-arrow-right ms-1"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Ссылка на вход -->
+        <div class="text-center pt-3 border-top">
+            <p class="text-muted mb-0">
+                Уже есть аккаунт?
+                <a href="{% url 'muiv_graduation_system:login' %}"
+                   class="fw-semibold text-decoration-none">
+                    Войти в систему
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- CSS для эффекта hover -->
+<style>
+.hover-shadow {
+    transition: all 0.3s ease;
+}
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+}
+</style>
+
+{% endblock %}

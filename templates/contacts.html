@@ -1,0 +1,206 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-lg-10">
+        <!-- Заголовок -->
+        <div class="text-center mb-5">
+            <i class="bi bi-envelope-fill text-primary mb-3" style="font-size: 3.5rem;"></i>
+            <h1 class="h2 mb-3">Контакты</h1>
+            <p class="lead text-muted">
+                Свяжитесь с нами любым удобным способом
+            </p>
+        </div>
+
+        <!-- Университет -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-building me-2"></i>Московский университет имени С.Ю. Витте
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-geo-alt-fill text-danger me-3 fs-4 flex-shrink-0"></i>
+                            <div>
+                                <strong>Адрес</strong>
+                                <p class="mb-0 text-muted">115432, г. Москва, 2-й Кожуховский проезд, 12с1</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-telephone-fill text-success me-3 fs-4 flex-shrink-0"></i>
+                            <div>
+                                <strong>Телефон</strong>
+                                <p class="mb-0">
+                                    <a href="tel:+74955000363" class="text-decoration-none">+7 (495) 500-03-63</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-envelope-fill text-primary me-3 fs-4 flex-shrink-0"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p class="mb-0">
+                                    <a href="mailto:info@muiv.ru" class="text-decoration-none">info@muiv.ru</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-globe text-info me-3 fs-4 flex-shrink-0"></i>
+                            <div>
+                                <strong>Официальный сайт</strong>
+                                <p class="mb-0">
+                                    <a href="https://muiv.ru" target="_blank" class="text-decoration-none">
+                                        https://muiv.ru <i class="bi bi-box-arrow-up-right small"></i>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Центр карьеры -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-briefcase-fill me-2"></i>Центр карьеры МУ им. С.Ю. Витте
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-envelope-at-fill text-primary me-3 fs-4 flex-shrink-0"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p class="mb-0">
+                                    <a href="mailto:career@muiv.ru" class="text-decoration-none">kkass@muiv.ru</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-telephone-fill text-success me-3 fs-4 flex-shrink-0"></i>
+                            <div>
+                                <strong>Телефон</strong>
+                                <p class="mb-0">
+                                    <a href="tel:+74951234568" class="text-decoration-none">+7 (499) 877-17-05</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Автор проекта -->
+        <div class="card shadow-sm mb-4 border-info">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-person-circle me-2"></i>Автор проекта
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center mb-3 mb-md-0">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                            <i class="bi bi-person-fill text-info" style="font-size: 4rem;"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h4 class="mb-3">Монахов Артем Сергеевич</h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-phone-fill text-success me-2"></i>
+                                    <a href="tel:+79689109203" class="text-decoration-none">+7 (968) 910-92-03</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-telegram text-primary me-2"></i>
+                                    <a href="https://t.me/J7stListen" target="_blank" class="text-decoration-none">
+                                        @J7stListen <i class="bi bi-box-arrow-up-right small"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-envelope-fill text-danger me-2"></i>
+                                    <a href="mailto:monakhov.artyom@yandex.ru" class="text-decoration-none">monakhov.artyom@yandex.ru</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Быстрая связь -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100 border-primary">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-chat-dots-fill text-primary mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="mb-2">Обратная связь</h5>
+                        <p class="text-muted small mb-3">
+                            Есть вопросы или предложения? Напишите нам через форму обратной связи
+                        </p>
+                        <a href="{% url 'muiv_graduation_system:feedback' %}" class="btn btn-primary">
+                            <i class="bi bi-send me-1"></i>Написать сообщение
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100 border-success">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-question-circle-fill text-success mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="mb-2">Нужна помощь?</h5>
+                        <p class="text-muted small mb-3">
+                            Ознакомьтесь с информацией о проекте или свяжитесь с нами напрямую
+                        </p>
+                        <a href="{% url 'muiv_graduation_system:about' %}" class="btn btn-success">
+                            <i class="bi bi-info-circle me-1"></i>О проекте
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карта (опционально) -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">
+                    <i class="bi bi-map me-2"></i>Как нас найти
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="ratio ratio-16x9" style="max-height: 400px;">
+                    <iframe
+                        src="https://yandex.ru/map-widget/v1/?ll=37.655150%2C55.700339&z=16&l=map&pt=37.655150,55.700339,pm2rdm"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        style="border-radius: 0 0 0.375rem 0.375rem;">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

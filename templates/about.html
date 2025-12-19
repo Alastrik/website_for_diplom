@@ -1,0 +1,206 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}О проекте{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-lg-10">
+        <!-- Заголовок -->
+        <div class="text-center mb-5">
+            <i class="bi bi-info-circle-fill text-primary mb-3" style="font-size: 3.5rem;"></i>
+            <h1 class="h2 mb-3">О проекте</h1>
+            <p class="lead text-muted">
+                Информационная система учета трудоустройства выпускников
+            </p>
+        </div>
+
+        <!-- Основная информация -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-start mb-3">
+                    <i class="bi bi-file-earmark-text-fill text-primary me-3 fs-3"></i>
+                    <div>
+                        <h5 class="mb-2">Выпускная квалификационная работа</h5>
+                        <p class="mb-0 text-muted">
+                            Данный веб-ресурс разработан в рамках выпускной квалификационной работы на тему: 
+                            <br>
+                            <strong class="text-dark">
+                                «Разработка информационной системы учета трудоустройства выпускников 
+                                (на примере ЧОУ ВО «Московский университет имени С.Ю. Витте»)»
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Цель проекта -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-bullseye me-2"></i>Цель проекта
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <p class="mb-0">
+                    Автоматизация процесса сбора, хранения, анализа и отчётности данных о трудоустройстве выпускников, 
+                    повышение прозрачности взаимодействия между выпускниками, менеджерами центра карьеры и администрацией университета.
+                </p>
+            </div>
+        </div>
+
+        <!-- Функции системы -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-gear-fill me-2"></i>Основные функции системы
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                            <span>Регистрация и авторизация пользователей с разграничением прав (выпускник, менеджер, администратор)</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                            <span>Ввод и редактирование данных о трудоустройстве</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                            <span>Поиск выпускников по ФИО, специальности, факультету, работодателю или должности</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                            <span>Генерация отчётов в форматах <code>.docx</code> и <code>.xlsx</code></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                            <span>Обратная связь с администрацией</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Технологии -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-code-slash me-2"></i>Технологии
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="text-center p-3 bg-light rounded">
+                            <i class="bi bi-filetype-py text-primary mb-2" style="font-size: 2.5rem;"></i>
+                            <h6 class="mb-1">Python</h6>
+                            <small class="text-muted">Язык программирования</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-3 bg-light rounded">
+                            <i class="bi bi-diagram-3-fill text-success mb-2" style="font-size: 2.5rem;"></i>
+                            <h6 class="mb-1">Django</h6>
+                            <small class="text-muted">Web-фреймворк</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-3 bg-light rounded">
+                            <i class="bi bi-database-fill text-info mb-2" style="font-size: 2.5rem;"></i>
+                            <h6 class="mb-1">PostgreSQL</h6>
+                            <small class="text-muted">База данных</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-3 bg-light rounded">
+                            <i class="bi bi-file-earmark-word-fill text-primary mb-2" style="font-size: 2.5rem;"></i>
+                            <h6 class="mb-1">python-docx</h6>
+                            <small class="text-muted">Генерация DOCX</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-3 bg-light rounded">
+                            <i class="bi bi-file-earmark-excel-fill text-success mb-2" style="font-size: 2.5rem;"></i>
+                            <h6 class="mb-1">openpyxl</h6>
+                            <small class="text-muted">Генерация XLSX</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-3 bg-light rounded">
+                            <i class="bi bi-bootstrap-fill text-primary mb-2" style="font-size: 2.5rem;"></i>
+                            <h6 class="mb-1">Bootstrap 5</h6>
+                            <small class="text-muted">CSS-фреймворк</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дополнительная информация -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-people-fill text-primary mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="mb-2">Роли пользователей</h5>
+                        <p class="text-muted small mb-3">Система поддерживает три роли:</p>
+                        <div class="d-flex flex-column gap-2">
+                            <span class="badge bg-primary">Выпускник</span>
+                            <span class="badge bg-success">Менеджер</span>
+                            <span class="badge bg-danger">Администратор</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-shield-check-fill text-success mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="mb-2">Безопасность</h5>
+                        <p class="text-muted small mb-0">
+                            Реализована система аутентификации и авторизации с разграничением прав доступа. 
+                            Все пароли хранятся в зашифрованном виде.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Призыв к действию -->
+        <div class="card shadow-sm border-primary mb-4">
+            <div class="card-body text-center p-4">
+                <h5 class="mb-3">Готовы начать?</h5>
+                <p class="text-muted mb-3">
+                    Зарегистрируйтесь в системе или свяжитесь с нами для получения дополнительной информации
+                </p>
+                <div class="d-flex gap-2 justify-content-center flex-wrap">
+                    {% if not user.is_authenticated %}
+                        <a href="{% url 'muiv_graduation_system:register' %}" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i>Регистрация
+                        </a>
+                        <a href="{% url 'muiv_graduation_system:login' %}" class="btn btn-outline-primary">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Вход
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'muiv_graduation_system:feedback' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-chat-dots me-1"></i>Обратная связь
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

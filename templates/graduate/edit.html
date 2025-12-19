@@ -1,0 +1,193 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Редактировать профиль{% endblock %}
+
+{% block content %}
+
+<!-- Заголовок с навигацией -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+            <i class="bi bi-pencil-square me-2"></i>Редактировать профиль
+        </h1>
+        <a href="{% url 'muiv_graduation_system:profile' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Назад
+        </a>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Карточка: Личные данные -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h5 mb-0">
+                    <i class="bi bi-person-lines-fill me-2"></i>Личные данные
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="full_name" class="form-label">
+                            ФИО <span class="text-danger">*</span>
+                        </label>
+                        <input type="text"
+                               id="full_name"
+                               name="full_name"
+                               value="{{ graduate.full_name }}"
+                               required
+                               class="form-control"
+                               placeholder="Иванов Иван Иванович">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="graduation_year" class="form-label">
+                            Год выпуска <span class="text-danger">*</span>
+                        </label>
+                        <input type="number"
+                               id="graduation_year"
+                               name="graduation_year"
+                               value="{{ graduate.graduation_year }}"
+                               min="2000"
+                               max="2030"
+                               required
+                               class="form-control"
+                               placeholder="2024">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="faculty" class="form-label">Факультет</label>
+                        <input type="text"
+                               id="faculty"
+                               name="faculty"
+                               value="{{ graduate.faculty|default:'' }}"
+                               class="form-control"
+                               placeholder="Например: Информационных технологий">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="specialization" class="form-label">Специальность</label>
+                        <input type="text"
+                               id="specialization"
+                               name="specialization"
+                               value="{{ graduate.specialization|default:'' }}"
+                               class="form-control"
+                               placeholder="Например: Программная инженерия">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">
+                            Email <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="email"
+                                   id="email"
+                                   name="email"
+                                   value="{{ graduate.email }}"
+                                   required
+                                   class="form-control"
+                                   placeholder="example@mail.ru">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Телефон</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-telephone"></i>
+                            </span>
+                            <input type="tel"
+                                   id="phone"
+                                   name="phone"
+                                   value="{{ graduate.phone|default:'' }}"
+                                   class="form-control"
+                                   placeholder="+7 (999) 123-45-67">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточка: Трудоустройство -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h2 class="h5 mb-0">
+                    <i class="bi bi-briefcase-fill me-2"></i>Трудоустройство
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="employment_status" class="form-label">Статус</label>
+                        <select id="employment_status" name="employment_status" class="form-select">
+                            <option value="">— Не выбрано —</option>
+                            {% for status in statuses %}
+                                <option value="{{ status.id }}"
+                                        {% if employment and employment.status and employment.status.id == status.id %}selected{% endif %}>
+                                    {{ status.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="employer_name" class="form-label">Название работодателя</label>
+                        <input type="text"
+                               id="employer_name"
+                               name="employer_name"
+                               value="{{ employer_name|default:'' }}"
+                               class="form-control"
+                               placeholder="Например: ООО Рога и копыта">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="job_title" class="form-label">Должность</label>
+                        <input type="text"
+                               id="job_title"
+                               name="job_title"
+                               value="{{ employment.job_title|default:'' }}"
+                               class="form-control"
+                               placeholder="Например: Backend разработчик">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="salary" class="form-label">Зарплата</label>
+                        <div class="input-group">
+                            <input type="number"
+                                   id="salary"
+                                   name="salary"
+                                   value="{{ employment.salary|default:'' }}"
+                                   class="form-control"
+                                   placeholder="150000"
+                                   min="0"
+                                   step="1000">
+                            <span class="input-group-text">₽/мес.</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="start_date" class="form-label">Дата начала работы</label>
+                        <input type="date"
+                               id="start_date"
+                               name="start_date"
+                               value="{% if employment and employment.start_date %}{{ employment.start_date|date:'Y-m-d' }}{% endif %}"
+                               class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель действий -->
+        <div class="d-flex flex-wrap gap-2 justify-content-between mb-4">
+            <a href="{% url 'muiv_graduation_system:profile' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-x-circle me-1"></i>Отмена
+            </a>
+            <button type="submit" class="btn btn-primary btn px-5">
+                <i class="bi bi-check-circle me-1"></i>Сохранить изменения
+            </button>
+        </div>
+    </form>
+{% endblock %}

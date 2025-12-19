@@ -1,0 +1,198 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Поиск выпускников{% endblock %}
+
+{% block content %}
+
+<!-- Заголовок и форма поиска -->
+<div class="mb-4">
+    <div class="card-body">
+        <h2 class="h4 mb-3">
+            <i class="bi bi-search me-2"></i>Поиск выпускников
+        </h2>
+
+        <form method="GET">
+            <div class="input-group input-group-lg">
+                <span class="input-group-text bg-white">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text"
+                       name="query"
+                       value="{{ query|default:'' }}"
+                       class="form-control border-start-0"
+                       placeholder="ФИО, факультет, специальность, работодатель, должность..."
+                       autofocus>
+                <button type="submit" class="btn btn-primary px-4">
+                    Найти
+                </button>
+            </div>
+            <div class="form-text mt-2">
+                <i class="bi bi-lightbulb me-1"></i>
+                Например: <span class="text-muted">Иванов</span>,
+                <span class="text-muted">ФИТ</span>,
+                <span class="text-muted">Яндекс</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Результаты поиска -->
+{% if graduates %}
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <div>
+            <h5 class="mb-0">
+                Найдено: <span class="badge bg-primary">{{ graduates|length }}</span>
+            </h5>
+            {% if query %}
+                <p class="text-muted small mb-0 mt-1">
+                    По запросу: <strong>{{ query }}</strong>
+                </p>
+            {% endif %}
+        </div>
+
+        <!-- Кнопки экспорта -->
+        <div class="btn-group" role="group">
+            <a href="{% url 'muiv_graduation_system:export_search_results' format='docx' %}?query={{ query|urlencode }}"
+               class="btn btn-outline-primary btn-sm"
+               target="_blank">
+                <i class="bi bi-file-earmark-word me-1"></i>DOCX
+            </a>
+            <a href="{% url 'muiv_graduation_system:export_search_results' format='xlsx' %}?query={{ query|urlencode }}"
+               class="btn btn-outline-success btn-sm"
+               target="_blank">
+                <i class="bi bi-file-earmark-excel me-1"></i>XLSX
+            </a>
+        </div>
+    </div>
+
+    <!-- Карточки результатов -->
+    <div class="row g-3">
+        {% for grad in graduates %}
+            <div class="col-12">
+                <div class="card shadow-sm hover-shadow transition">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Основная информация -->
+                            <div class="col-lg-5">
+                                <div class="d-flex gap-3 mb-3 mb-lg-0">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center"
+                                             style="width: 50px; height: 50px;">
+                                            <i class="bi bi-person-fill text-primary fs-4"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 min-width-0">
+                                        <h5 class="mb-1">{{ grad.full_name }}</h5>
+                                        <div class="small text-muted mb-1">
+                                            <i class="bi bi-calendar3 me-1"></i>{{ grad.graduation_year }}
+                                        </div>
+                                        {% if grad.faculty %}
+                                            <div class="small text-muted mb-1">
+                                                <i class="bi bi-building me-1"></i>{{ grad.faculty }}
+                                            </div>
+                                        {% endif %}
+                                        {% if grad.specialization %}
+                                            <div class="small text-muted mb-1">
+                                                <i class="bi bi-book me-1"></i>{{ grad.specialization }}
+                                            </div>
+                                        {% endif %}
+                                        <div class="small text-muted">
+                                            <i class="bi bi-envelope me-1"></i>{{ grad.email }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Информация о трудоустройстве -->
+                            <div class="col-lg-7">
+                                {% if grad.employment and grad.employment.status %}
+                                    <div class="mb-2">
+                                        <span class="badge bg-success mb-2">
+                                            {{ grad.employment.status.name }}
+                                        </span>
+                                    </div>
+
+                                    <div class="row g-2 small">
+                                        {% if grad.employment.employer %}
+                                            <div class="col-md-6">
+                                                <div class="text-muted">Работодатель:</div>
+                                                <div class="fw-semibold text-truncate">
+                                                    {{ grad.employment.employer.name }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if grad.employment.job_title %}
+                                            <div class="col-md-6">
+                                                <div class="text-muted">Должность:</div>
+                                                <div class="text-truncate">{{ grad.employment.job_title }}</div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if grad.employment.salary %}
+                                            <div class="col-md-6">
+                                                <div class="text-muted">Зарплата:</div>
+                                                <div class="text-success fw-semibold">
+                                                    {{ grad.employment.salary|floatformat:0 }} ₽/мес
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if grad.employment.start_date %}
+                                            <div class="col-md-6">
+                                                <div class="text-muted">Дата начала:</div>
+                                                <div>{{ grad.employment.start_date|date:"d.m.Y" }}</div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% else %}
+                                    <span class="badge bg-secondary">Трудоустройство не указано</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    {% if query %}
+        <div class="text-center py-5">
+            <i class="bi bi-search text-muted mb-3" style="font-size: 4rem;"></i>
+            <h5 class="text-muted">Ничего не найдено</h5>
+            <p class="text-muted mb-3">
+                По запросу <strong>«{{ query }}»</strong> не найдено ни одного выпускника
+            </p>
+            <a href="{% url 'muiv_graduation_system:search_graduates' %}" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Очистить поиск
+            </a>
+        </div>
+    {% else %}
+        <div class="alert alert-info d-flex align-items-center">
+            <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+            <div>Введите запрос для поиска выпускников</div>
+        </div>
+    {% endif %}
+{% endif %}
+
+<!-- Навигация -->
+<div class="mt-4">
+    <a href="{% url 'muiv_graduation_system:manager_graduates' %}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Все выпускники
+    </a>
+</div>
+
+<style>
+.hover-shadow {
+    transition: all 0.2s ease;
+}
+.hover-shadow:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+}
+.min-width-0 {
+    min-width: 0;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Вход в систему{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <!-- Заголовок -->
+                <div class="text-center mb-4">
+                    <div class="mb-3">
+                        <i class="bi bi-box-arrow-in-right text-danger" style="font-size: 3rem;"></i>
+                    </div>
+                    <h2 class="h4 text-danger mb-1">Вход в систему</h2>
+                    <p class="text-muted small mb-0">Введите свои учетные данные</p>
+                </div>
+
+                <!-- Форма -->
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Логин</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text"
+                                   class="form-control"
+                                   id="id_username"
+                                   name="username"
+                                   placeholder="Ваш логин"
+                                   required
+                                   autofocus>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="id_password" class="form-label">Пароль</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password"
+                                   class="form-control"
+                                   id="id_password"
+                                   name="password"
+                                   placeholder="Ваш пароль"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Ссылка на регистрацию -->
+                <div class="text-center">
+                    <hr class="my-3">
+                    <p class="text-muted mb-0">
+                        Нет аккаунта? 
+                        <a href="{% url 'muiv_graduation_system:register' %}" class="text-danger fw-semibold text-decoration-none">
+                            Зарегистрироваться
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

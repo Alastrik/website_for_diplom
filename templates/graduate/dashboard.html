@@ -1,0 +1,18 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Мой кабинет — Выпускник{% endblock %}
+
+{% block content %}
+
+<h2>Личный кабинет выпускника</h2>
+<p><strong>ФИО:</strong> {{ graduate.full_name }}</p>
+<p><strong>Год выпуска:</strong> {{ graduate.graduation_year }}</p>
+<p><strong>Email:</strong> {{ graduate.email }}</p>
+<p><strong>Факультет:</strong> {{ graduate.faculty|default:"Не указан" }}</p>
+
+<p>
+  <a href="{% url 'muiv_graduation_system:profile' %}" class="btn">➡ Перейти в профиль</a>
+  <a href="{% url 'muiv_graduation_system:logout' %}" class="btn">Выйти</a>
+</p>
+{% endblock %}

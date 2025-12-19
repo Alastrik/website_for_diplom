@@ -1,0 +1,165 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Регистрация выпускника{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-lg-8 col-xl-6">
+        <!-- Карточка формы -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h5 mb-0">
+                    <i class="bi bi-mortarboard-fill me-2"></i>Регистрация выпускника
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Личные данные -->
+                    <h6 class="text-muted mb-3 pb-2 border-bottom">
+                        <i class="bi bi-person me-1"></i>Личные данные
+                    </h6>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label for="last_name" class="form-label">
+                                Фамилия <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" 
+                                   id="last_name"
+                                   name="last_name" 
+                                   required 
+                                   class="form-control"
+                                   placeholder="Иванов"
+                                   autofocus>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="first_name" class="form-label">
+                                Имя <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" 
+                                   id="first_name"
+                                   name="first_name" 
+                                   required 
+                                   class="form-control"
+                                   placeholder="Иван">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="middle_name" class="form-label">
+                                Отчество
+                            </label>
+                            <input type="text" 
+                                   id="middle_name"
+                                   name="middle_name" 
+                                   class="form-control"
+                                   placeholder="Иванович">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="graduation_year" class="form-label">
+                            Год выпуска <span class="text-danger">*</span>
+                        </label>
+                        <input type="number" 
+                               id="graduation_year"
+                               name="graduation_year" 
+                               min="2000" 
+                               max="2030" 
+                               required 
+                               class="form-control"
+                               placeholder="2024"
+                               value="2024">
+                    </div>
+
+                    <!-- Данные для входа -->
+                    <h6 class="text-muted mb-3 pb-2 border-bottom">
+                        <i class="bi bi-shield-lock me-1"></i>Данные для входа
+                    </h6>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">
+                            Логин <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text" 
+                                   id="username"
+                                   name="username" 
+                                   required 
+                                   class="form-control"
+                                   placeholder="ivanov_ivan">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            Email <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="email" 
+                                   id="email"
+                                   name="email" 
+                                   required 
+                                   class="form-control"
+                                   placeholder="ivanov@mail.ru">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label">
+                            Пароль <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password" 
+                                   id="password"
+                                   name="password" 
+                                   required 
+                                   minlength="6" 
+                                   class="form-control"
+                                   placeholder="Минимум 6 символов">
+                        </div>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle me-1"></i>Минимум 6 символов
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-check-circle me-2"></i>Зарегистрироваться
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Ссылка на вход -->
+        <div class="text-center mt-3">
+            <p class="text-muted">
+                Уже есть аккаунт? 
+                <a href="{% url 'muiv_graduation_system:login' %}" 
+                   class="fw-semibold text-decoration-none">
+                    Войти в систему
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

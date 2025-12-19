@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Ожидаемые заявки — Админ{% endblock %}
+
+{% block content %}
+
+<h2>Ожидаемые заявки на регистрацию менеджеров</h2>
+
+{% if requests %}
+  <table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <thead>
+      <tr style="background-color: #f0f0f0;">
+        <th>ФИО</th>
+        <th>Логин</th>
+        <th>Email</th>
+        <th>Дата</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in requests %}
+        <tr>
+          <td>{{ r.full_name|default:"—" }}</td>
+          <td>{{ r.username }}</td>
+          <td>{{ r.email }}</td>
+          <td>{{ r.created_at|date:"d.m.Y" }}</td>
+          <td>
+            <a href="{% url 'muiv_graduation_system:approve_request' request_id=r.id %}" class="btn">✅ Одобрить</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Нет ожидающих заявок.</p>
+{% endif %}
+
+<p>
+  <a href="{% url 'muiv_graduation_system:profile' %}" class="btn">← Назад в профиль</a>
+</p>
+{% endblock %}

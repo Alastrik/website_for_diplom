@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Создать пользователя — Админ{% endblock %}
+
+{% block content %}
+
+<h2>Создать нового пользователя</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <div style="margin-bottom: 16px;">
+    <label>Логин: <input type="text" name="username" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></label>
+  </div>
+
+  <div style="margin-bottom: 16px;">
+    <label>Email: <input type="email" name="email" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></label>
+  </div>
+
+  <div style="margin-bottom: 16px;">
+    <label>Пароль: <input type="password" name="password" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></label>
+  </div>
+
+  <div style="margin-bottom: 16px;">
+    <label>Роль:
+      <select name="role_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        {% for role in roles %}
+          <option value="{{ role.id }}">{{ role.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </div>
+
+  <button type="submit" class="btn" style="padding: 10px 20px;">Создать</button>
+</form>
+
+<p>
+  <a href="{% url 'muiv_graduation_system:admin_users' %}" class="btn">← Назад к списку</a>
+</p>
+{% endblock %}
