@@ -1,0 +1,1 @@
+default_app_config = 'muiv_graduation_system.apps.MuivGraduationSystemConfig'
