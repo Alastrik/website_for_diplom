@@ -1,0 +1,207 @@
+:root {
+  --primary: #C00000;       /* Тёмно-красный (официальный) */
+  --primary-dark: #A00000;
+  --dark: #222222;          /* Почти чёрный */
+  --text: #333333;          /* Тёмно-серый текст */
+  --light-bg: #FFFFFF;      /* Белый фон */
+  --border: #DDDDDD;        /* Светло-серая граница */
+  --header-bg: #222222;     /* Фон шапки */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* === ШАПКА === */
+header {
+  background-color: var(--header-bg);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+header img {
+  height: 50px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.header-left img {
+  height: 40px;
+}
+
+.header-left .btn-header {
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.header-left .btn-header:hover {
+  background-color: var(--primary-dark);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  flex: 1 1 auto;
+}
+
+.header-right {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.header-right a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid white;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.header-right a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.auth-buttons {
+  margin-top: 10px;
+}
+
+.auth-buttons a {
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin: 0 6px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.auth-buttons a:hover {
+  background-color: var(--primary-dark);
+}
+
+/* === ОСНОВНОЕ МЕНЮ === */
+nav {
+  background-color: #333;
+  padding: 0.6rem 0;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* === ОСНОВНОЙ КОНТЕНТ === */
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* === КНОПКИ === */
+.btn {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 4px 6px 4px 0;
+  font-weight: bold;
+  border: none;
+}
+
+.btn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* === ТАБЛИЦЫ === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+
+table, th, td {
+  border: 1px solid var(--border);
+}
+
+th {
+  background-color: #f8f8f8;
+  text-align: left;
+  padding: 10px;
+  font-weight: bold;
+}
+
+td {
+  padding: 10px;
+}
+
+/* === ХЛЕБНЫЕ КРОШКИ === */
+.breadcrumb {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.breadcrumb li {
+  display: inline;
+}
+
+.breadcrumb li:after {
+  content: " > ";
+  margin: 0 5px;
+}
+
+.breadcrumb li:last-child:after {
+  content: "";
+}
+
+/* === ПОДВАЛ === */
+footer {
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 12px;
+  margin-top: 30px;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
