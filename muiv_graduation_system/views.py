@@ -14,6 +14,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, FormView, DetailView, UpdateView
 from django.urls import reverse_lazy
 
+
 from docx import Document
 from docx.shared import RGBColor
 from openpyxl import Workbook
@@ -63,6 +64,7 @@ class ContactsView(TemplateView):
     template_name = 'contacts.html'
 
 
+
 class FeedbackView(View):
     """Обратная связь"""
     template_name = 'feedback.html'
@@ -72,30 +74,55 @@ class FeedbackView(View):
 
     def post(self, request):
         subject = request.POST.get('subject', 'Без темы')
-        message = request.POST.get('message', '')
+        message = request.POST.get('message', '').strip()
 
         if not message:
             messages.error(request, "Сообщение не может быть пустым")
             return render(request, self.template_name)
 
-        user = request.user if request.user.is_authenticated else None
+        # Если пользователь авторизован — используем его
+        if request.user.is_authenticated:
+            user = request.user
+            Feedback.objects.create(user=user, subject=subject, message=message)
+            messages.success(request, "Ваше сообщение отправлено! Спасибо за обратную связь.")
+            return redirect('muiv_graduation_system:index')
 
-        # Для гостей создаём временного пользователя
-        if not user:
-            email = request.POST.get('email', '')
-            if email and re.match(r"[^@]+@[^@]+\.[^@]+", email):
-                role, _ = Role.objects.get_or_create(name='graduate')
-                username = f"guest_{datetime.now().strftime('%Y%m%d%H%M%S')}"
-                user = User.objects.create(
-                    username=username,
-                    email=email,
-                    password=make_password('guest123'),
-                    role=role
-                )
-            else:
-                # Fallback на первого админа
-                user = User.objects.filter(role__name='admin').first() or User.objects.first()
+        # Пользователь НЕ авторизован — обрабатываем как гость
+        email = request.POST.get('email', '').strip()
 
+        # Валидация email
+        if not email:
+            messages.error(request, "Пожалуйста, укажите email.")
+            return render(request, self.template_name)
+
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            messages.error(request, "Некорректный адрес email.")
+            return render(request, self.template_name)
+
+        # 🔍 Проверяем, существует ли уже пользователь с таким email
+        if User.objects.filter(email=email).exists():
+            messages.error(
+                request,
+                "На этот email уже зарегистрирован аккаунт. Вам необходимо войти в систему."
+            )
+            return render(request, self.template_name)
+
+        # Если email свободен — создаём временного пользователя
+        try:
+            role, _ = Role.objects.get_or_create(name='graduate')
+            username = f"guest_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+            user = User.objects.create(
+                username=username,
+                email=email,
+                password=make_password('guest123'),
+                role=role
+            )
+        except Exception as e:
+            # На случай, если что-то пошло не так при создании (например, дубль username)
+            messages.error(request, "Не удалось создать временного пользователя. Попробуйте позже.")
+            return render(request, self.template_name)
+
+        # Сохраняем обратную связь
         Feedback.objects.create(user=user, subject=subject, message=message)
         messages.success(request, "Ваше сообщение отправлено! Спасибо за обратную связь.")
         return redirect('muiv_graduation_system:index')

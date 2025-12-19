@@ -100,7 +100,7 @@ class Employment(models.Model):
         blank=True,
         verbose_name='Статус'
     )
-    job_title = models.CharField(max_length=150, blank=True, verbose_name='Должность')
+    job_title = models.CharField(max_length=150, null=True, blank=True, verbose_name='Должность')
     start_date = models.DateField(null=True, blank=True, verbose_name='Дата начала работы')
     salary = models.IntegerField(null=True, blank=True, verbose_name='Зарплата')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
